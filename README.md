@@ -25,7 +25,7 @@ This include_role creates a docker container. The user id for docker container m
 | app_network_ipam | {{ omit }} | dict | (optional) IPAM config blocks list. |
 
 ## Dependencies
-- knelldev.app_prepare
+None
 
 ## Minimal example
 ```yaml
