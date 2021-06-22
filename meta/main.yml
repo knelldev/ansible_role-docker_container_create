@@ -1,0 +1,32 @@
+galaxy_info:
+  author: knelldev
+  description: This include_role creates a docker container. The user id for docker container mapping is automatically computed.
+
+  company: knelldev
+
+  role_name: docker_container_create
+
+  license: license (MIT)
+
+  min_ansible_version: 2.9
+  platforms:
+  - name: Debian
+    versions:
+      - stretch
+      - buster
+  - name: Ubuntu
+    versions:
+      - xenial
+      - bionic
+      - focal
+
+  galaxy_tags: 
+    - linux
+    - system
+    - development
+    - app
+    - application
+    - prepare
+
+dependencies:
+  - knelldev.docker_install
