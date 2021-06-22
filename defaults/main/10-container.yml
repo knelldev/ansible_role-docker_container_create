@@ -1,0 +1,32 @@
+################################################################
+# Default Values for Role - Might contain placeholders for password - NOT live
+################################################################
+---
+
+app_user: "{{ os_user }}"
+app_name: app
+app_hostname: app
+
+app_network_name: "{{ docker_network_name }}"
+app_networks:
+  - name: "{{ app_network_name }}"
+
+# app_network_ipam: 
+#   - subnet: "192.168.61.1/24"
+
+app_imagename: hello-world
+app_version: latest
+
+app_volumes: []
+#  - "{{ app_path }}:/path/in/container"
+  
+app_ports: []
+#  - 8080:80
+#  - 8443:443
+
+app_env: []
+
+app_state: present
+app_restart: yes
+app_pull: yes
+app_recreate: yes

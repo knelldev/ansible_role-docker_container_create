@@ -1,0 +1,6 @@
+tz_volumes:
+  - /etc/localtime:/etc/localtime:ro
+  - /etc/timezone:/etc/timezone:ro
+
+tz_env:
+  TZ: "{{ os_timezone }}"

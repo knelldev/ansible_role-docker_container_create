@@ -1,0 +1,32 @@
+---
+- name: ({{ task_filename }}) create a docker network for app
+  docker_network:
+    name: "{{ app_network_name }}"
+    ipam_config: "{{ app_network_ipam | default(omit) }}"
+
+- name: ({{ task_filename }}) get UID
+  command: "id -u {{ app_user }}"
+  changed_when: False
+  register: app_uid
+
+- name: ({{ task_filename }}) get GID
+  command: "id -g {{ app_user }}"
+  changed_when: False
+  register: app_gid
+
+- name: "({{ task_filename }}) create {{ app_imagename }} docker container"
+  docker_container:
+    name: "{{ app_name }}"
+    hostname: "{{ app_hostname }}"
+    image: "{{ app_imagename }}:{{ app_version }}"
+    state: "{{ app_state }}"
+    restart: "{{ app_restart }}"
+    restart_policy: unless-stopped
+    pull: "{{ app_pull }}"
+    volumes: "{{ tz_volumes + app_volumes }}"
+    ports: "{{ app_ports }}"
+    env: "{{ tz_env | combine(app_env) }}"
+    purge_networks: yes
+    networks: "{{ app_networks }}"
+    user: "{{ app_uid.stdout }}:{{ app_gid.stdout }}"
+    recreate: "{{ app_recreate }}"
