@@ -30,3 +30,4 @@
     networks: "{{ app_networks }}"
     user: "{{ app_uid.stdout }}:{{ app_gid.stdout }}"
     recreate: "{{ app_recreate }}"
+    command: "{{ app_command | default(omit) }}"

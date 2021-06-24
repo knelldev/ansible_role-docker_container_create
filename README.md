@@ -17,12 +17,13 @@ This include_role creates a docker container. The user id for docker container m
 | app_volumes | [] | List[str] | The volumes of the container. Time zone volumes are automatically added to this list. |
 | app_ports | [] | List[str] | List of ports to publish from the container to the host. |
 | app_env | [] | dict | The environment variables of the container. Time zone environment variable is automatically added to this dict. |
-| app_state | present | enum[absent, present, started, stopped] | The state of the container. |
+| app_state | started | enum[absent, present, started, stopped] | The state of the container. |
 | app_restart | yes | boolean | Use with started state to force a matching container to be stopped and restarted. |
 | app_pull | yes | boolean | If yes, always pull the latest version of an image. Otherwise, will only pull an image when missing. |
 | app_recreate | yes | boolean | Force the recreation of an existing container. |
 | app_networks | - name: "{{ app_network_name }}" | dict | (optional) List of networks the container belongs to. Defaults to the single network {{ app_network_name }}. |
 | app_network_ipam | {{ omit }} | dict | (optional) IPAM config blocks list. |
+| app_command | {{ omit }} | str | The command that should be executed in the docker container. |
 
 ## Dependencies
 None
@@ -63,7 +64,7 @@ None
         - "8080:80"
       app_env: 
         USER: app
-      app_state: present
+      app_state: started
       app_restart: yes
       app_pull: yes
       app_recreate: yes
@@ -71,6 +72,7 @@ None
         - name: "{{ app_network_name }}"
       app_network_ipam:
         - subnet: "192.168.61.1/24"
+      app_command: /bin/bash
 ```
 
 ## License
