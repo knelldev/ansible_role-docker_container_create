@@ -25,6 +25,7 @@
       - '^[0-9]{1,2}.*\.yml'
   register: task_result
   delegate_to: localhost
+  become: no
 
 # Include tasks in ascending number order. The filename of the task will be set as variable `task_filename`
 - name: (main.yml) include tasks
