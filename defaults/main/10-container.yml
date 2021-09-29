@@ -3,7 +3,7 @@
 ################################################################
 ---
 
-app_user: "{{ os_user }}"
+# app_user: "{{ os_user }}"
 app_name: app
 app_hostname: app
 
@@ -30,5 +30,7 @@ app_state: started
 app_restart: yes
 app_pull: yes
 app_recreate: yes
+app_pid_mode: ""
+app_purge_networks: yes
 
 #app_command: 

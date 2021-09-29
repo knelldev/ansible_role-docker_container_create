@@ -4,15 +4,22 @@
     name: "{{ app_network_name }}"
     ipam_config: "{{ app_network_ipam | default(omit) }}"
 
-- name: ({{ task_filename }}) get UID
-  command: "id -u {{ app_user }}"
-  changed_when: False
-  register: app_uid
+- name: "({{ task_filename }}) Get UID/GID"
+  block:
+    - name: ({{ task_filename }}) get UID
+      command: "id -u {{ app_user }}"
+      changed_when: False
+      register: app_uid
 
-- name: ({{ task_filename }}) get GID
-  command: "id -g {{ app_user }}"
-  changed_when: False
-  register: app_gid
+    - name: ({{ task_filename }}) get GID
+      command: "id -g {{ app_user }}"
+      changed_when: False
+      register: app_gid
+
+    - name:
+      set_fact:
+        app_ids: "{{ app_uid.stdout }}:{{ app_gid.stdout }}"
+  when: app_user is defined
 
 - name: "({{ task_filename }}) create {{ app_imagename }} docker container"
   docker_container:
@@ -26,8 +33,9 @@
     volumes: "{{ tz_volumes + app_volumes }}"
     ports: "{{ app_ports }}"
     env: "{{ tz_env | combine(app_env) }}"
-    purge_networks: yes
+    pid_mode: "{{ app_pid_mode }}"
+    purge_networks: "{{ app_purge_networks }}"
     networks: "{{ app_networks }}"
-    user: "{{ app_uid.stdout }}:{{ app_gid.stdout }}"
+    user: "{{ app_ids | default('') }}"
     recreate: "{{ app_recreate }}"
     command: "{{ app_command | default(omit) }}"
