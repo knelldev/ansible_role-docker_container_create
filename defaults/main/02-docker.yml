@@ -1,0 +1,5 @@
+################################################################
+# Default Values for Role - Might contain placeholders for password - NOT live
+################################################################
+---
+docker_network_name: app    # [str] The name of the default docker network to be used for the containers

@@ -1,14 +1,13 @@
-##############################################################################
-# Default Values for Role - Might contain placeholders for password - NOT live
-##############################################################################
+###############################################################################
+# Default values for role - Might contain placeholders for passwords - NOT live
+###############################################################################
 ---
 
-# General configuration - best override this for groups and not single hosts.
-storage_base_path: /data    # [str] The default base directory for storing data
-os_home_dir: /home          # [str] The default home directory of the target operating system
-os_timezone: Europe/Berlin  # [str] The default time zone of the target operating system
-python_version: 3           # [int] The python version (2 or 3)
+# General configuration (included in every role) 
+storage_base_path: /data    # [path] Base directory where all our created data are stored
+os_home_dir: /home          # [path] Base directory for all homes
+os_timezone: Europe/Berlin  # [timezone] Timezone that should be used for applications 
 
-os_create_user: True        # [boolean] Create non existing users and groups
+os_create_user: True        # [bool] Create non-existing users and groups
 
-docker_network_name: app    # [str] The name of the default docker network to be used for the containers
+ansible_debug_enabled: True # [bool] Enable debug output
