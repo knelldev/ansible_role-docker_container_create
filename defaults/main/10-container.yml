@@ -34,3 +34,5 @@ app_pid_mode: ""
 app_purge_networks: yes
 
 #app_command: 
+
+app_labels: []

@@ -38,4 +38,5 @@
     networks: "{{ app_networks }}"
     user: "{{ app_ids | default('') }}"
     recreate: "{{ app_recreate }}"
+    labels: "{{ app_labels }}"
     command: "{{ app_command | default(omit) }}"

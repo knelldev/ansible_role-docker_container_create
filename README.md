@@ -23,6 +23,7 @@ This include_role creates a docker container. The user id for docker container m
 | app_recreate | yes | boolean | Force the recreation of an existing container. |
 | app_networks | - name: "{{ app_network_name }}" | dict | (optional) List of networks the container belongs to. Defaults to the single network {{ app_network_name }}. |
 | app_network_ipam | {{ omit }} | dict | (optional) IPAM config blocks list. |
+| app_labels | [] | List[str] | (optional) List of labels to be assigned to the new docker container. |
 | app_command | {{ omit }} | str | The command that should be executed in the docker container. |
 
 ## Dependencies
@@ -72,6 +73,7 @@ None
         - name: "{{ app_network_name }}"
       app_network_ipam:
         - subnet: "192.168.61.1/24"
+      app_labels: []
       app_command: /bin/bash
 ```
 
