@@ -35,4 +35,4 @@ app_purge_networks: yes
 
 #app_command: 
 
-app_labels: []
+app_labels: {}
